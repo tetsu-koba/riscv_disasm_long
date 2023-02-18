@@ -352,6 +352,8 @@ func disasm(file string, debug bool) {
 	scanner := bufio.NewScanner(instream)
 	scanner.Split(bufio.ScanLines)
 
+	// Assume the lines have the following format
+	// <address and hex dump>\t<opcode>\t<operand>...
 	for scanner.Scan() {
 		line := scanner.Text()
 		if debug {
