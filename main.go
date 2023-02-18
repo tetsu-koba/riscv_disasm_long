@@ -333,7 +333,7 @@ var opcodeMap = map[string]string{
 	"li":         "LoadImmediate",
 }
 
-func disasm(file string, debug bool) {
+func rewriteDisasm(file string, debug bool) {
 	var instream io.Reader
 	instream = os.Stdin
 	if file != "-" {
@@ -379,10 +379,10 @@ func disasm(file string, debug bool) {
 func main() {
 	if len(os.Args) != 2 {
 		log.Println("Usage:")
-		log.Printf("\t%s objfile  (./\"llvm-objdump -d objfile\" is called internally)\n", os.Args[0])
+		log.Printf("\t%s objfile  (\"llvm-objdump -d objfile\" is called internally)\n", os.Args[0])
 		log.Printf("\t%s - < objdump_output\n", os.Args[0])
 		os.Exit(1)
 	}
 	debug := false
-	disasm(os.Args[1], debug)
+	rewriteDisasm(os.Args[1], debug)
 }
