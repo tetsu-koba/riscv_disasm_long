@@ -1,3 +1,3 @@
-module example.com/riscv_disasm_long
+module github.com/tetsu-koba/riscv_disasm_long
 
 go 1.20
