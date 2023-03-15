@@ -2,7 +2,7 @@
 
 Disassemble RISC-V in a long format for easy understanding.
 
-In the usual way
+In the usual way:
 ```
    11e76: 03 35 84 fc  	ld	a0, -56(s0)
    11e7a: 93 15 05 02  	slli	a1, a0, 32
@@ -13,7 +13,7 @@ In the usual way
    11e8c: 23 38 a4 fa  	sd	a0, -80(s0)
 ```
 
-In this tool
+This tool displays:
 ```
    11e76: 03 35 84 fc  	LoadI64		a0, -56(s0)
    11e7a: 93 15 05 02  	ShiftLeftLogicalImm	a1, a0, 32
@@ -24,15 +24,15 @@ In this tool
    11e8c: 23 38 a4 fa  	StoreI64	a0, -80(s0)
 ```
 
-## Install
+## Installation
 
-This tool uses llvm-objdump. So you have to install llvm first.  
-For example,
+This tool relies on llvm-objdump, so you need to install LLVM first:
+
 ```
 $ sudo apt install llvm
 ```
 
-Then
+Then, install the tool itself:
 ```
 $ go install github.com/tetsu-koba/riscv_disasm_long@latest
 ```
@@ -48,6 +48,8 @@ $ riscv_disasm_long
 
 ## Example
 
+Compile a simple C program with Zig:
+
 ```
 $ cat hello.c 
 #include <stdio.h>
@@ -58,8 +60,18 @@ int main()
 	return 0;
 }
 $ zig cc --target=riscv64-linux-musl -o hello hello.c
+```
+
+Check the file type:
+
+```
 $ file hello
 hello: ELF 64-bit LSB executable, UCB RISC-V, RVC, double-float ABI, version 1 (SYSV), statically linked, with debug_info, not stripped
+```
+
+Disassemble using llvm-objdump (only displays the first 20 lines) :
+
+```
 $ llvm-objdump -d hello |head -20
 
 hello:	file format elf64-littleriscv
@@ -80,7 +92,11 @@ Disassembly of section .text:
 
 0000000000011d9a <_start_c>:
    11d9a: 0c 41        	lw	a1, 0(a0)
+```
 
+Disassemble using riscv_disasm_long (only displays the first 20 lines) :
+
+```
 $ riscv_disasm_long hello |head -20
 
 hello:	file format elf64-littleriscv
@@ -105,7 +121,4 @@ Disassembly of section .text:
 
 ```
 
-
-
-
-
+The riscv_disasm_long tool provides a more understandable disassembly output by using descriptive mnemonics for RISC-V instructions.
