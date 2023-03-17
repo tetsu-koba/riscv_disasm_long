@@ -24,6 +24,8 @@ This tool displays:
    11e8c: 23 38 a4 fa  	StoreI64	a0, -80(s0)
 ```
 
+[presentation slides](https://docs.google.com/presentation/d/1cxsZgpznZhemVmhztUeg5JehQj3DLLEfx281BAxdPkA/edit?usp=sharing) and [blog](https://zenn.dev/tetsu_koba/articles/c0e35bff96673f)
+
 ## Installation
 
 This tool relies on llvm-objdump, so you need to install LLVM first:
